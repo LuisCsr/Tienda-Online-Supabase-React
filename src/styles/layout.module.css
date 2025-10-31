@@ -1,0 +1,89 @@
+/* src/styles/layout.module.css (ESTILOS MEJORADOS) */
+
+/* Definición de variables de color para consistencia */
+:root {
+    --color-primary: #5a55ff; /* Azul Morado Vibrante */
+    --color-secondary: #00bcd4; /* Cian para acentos */
+    --color-background: #f4f6f8; /* Fondo suave */
+    --color-text-dark: #1f2937;
+    --color-error: #ef4444;
+}
+
+.navbar {
+    background-color: var(--color-primary); 
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra más profunda */
+}
+
+.navLink {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    font-weight: 600;
+    transition: color 0.3s;
+    border-radius: 4px;
+}
+.navLink:hover {
+    color: var(--color-secondary);
+}
+
+.logoutButton {
+    background-color: var(--color-error);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px; /* Bordes más redondeados */
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+.logoutButton:hover {
+    background-color: #dc2626;
+}
+
+.footer {
+    background-color: var(--color-text-dark);
+    color: #b0b8c4;
+    padding: 2rem 1rem;
+    text-align: center;
+    margin-top: 4rem; /* Más espacio en la parte superior */
+}
+
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--color-background);
+    font-family: 'Arial', sans-serif; /* Tipografía más clara */
+}
+
+.title {
+    font-size: 2.5rem; /* Más grande y llamativo */
+    font-weight: 800;
+    margin-bottom: 2rem;
+    color: var(--color-text-dark);
+    text-align: center;
+}
+
+.formBox {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    border: 1px solid #e0e0e0;
+    max-width: 480px; 
+    margin: 0 auto;
+}
+
+/* Estilo para enfoque visible (Focus Visible - WCAG AA) */
+:global(button:focus), 
+:global(a:focus), 
+:global(input:focus), 
+:global(select:focus) {
+    outline: 4px solid var(--color-secondary); /* Anillo más interactivo */
+    outline-offset: 3px;
+    border-color: var(--color-secondary); 
+}
