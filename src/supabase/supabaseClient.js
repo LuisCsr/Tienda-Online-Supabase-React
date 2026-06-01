@@ -1,13 +1,12 @@
-// src/supabase/supabaseClient.js
 import { createClient } from '@supabase/supabase-js';
 
-// Vite expone las variables de entorno con el prefijo VITE_
+
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
+// Validación en consola
 if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error("Missing Supabase environment variables. Check your .env.local file.");
+  console.error("⚠️ Error crítico: Las variables de entorno de Supabase no se cargaron en la aplicación.");
 }
 
-// Exporta el cliente para usarlo en toda la aplicación
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
