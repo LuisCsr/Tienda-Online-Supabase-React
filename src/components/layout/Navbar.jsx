@@ -2,13 +2,18 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import styles from '../../styles/layout.module.css'; // IMPORTACIÓN CRÍTICA
+import { useCart } from '../../contexts/CartContext'; // 1. IMPORTAMOS EL CARRITO
+import styles from '../../styles/layout.module.css'; 
 
 const Navbar = () => {
   const { user, signOut, getRole } = useAuth();
+  const { cart } = useCart(); // 2. EXTRAEMOS LA INFORMACIÓN DEL CARRITO
   const navigate = useNavigate();
-  // El rol ahora se lee del JWT, no del perfil de la página.
+  
   const isAdmin = getRole() === 'admin'; 
+
+  // 3. CALCULAMOS EL TOTAL DINÁMICO DE PRODUCTOS
+  const totalItems = cart?.items?.reduce((acc, item) => acc + item.cantidad, 0) || 0;
 
   const handleLogout = async () => {
     await signOut();
@@ -16,9 +21,9 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={styles.navbar}> {/* CSS Module */}
+    <nav className={styles.navbar}> 
       <Link to="/" className={`${styles.navLink} text-xl font-bold`} style={{fontSize: '1.5rem'}}>
-        🛒 MiTienda
+        🛒 Montalift
       </Link>
 
       <div style={{display: 'flex', gap: '1rem', alignItems: 'center'}}>
@@ -33,7 +38,10 @@ const Navbar = () => {
             )}
 
             <Link to="/profile" className={styles.navLink}>Perfil</Link>
-            <Link to="/cart" className={styles.navLink}>Carrito (0)</Link>
+            
+            {/* 4. AQUÍ OCURRE LA MAGIA: REEMPLAZAMOS EL (0) POR {totalItems} */}
+            <Link to="/cart" className={styles.navLink}>Carrito ({totalItems})</Link>
+            
             <button 
               onClick={handleLogout} 
               className={styles.logoutButton}
